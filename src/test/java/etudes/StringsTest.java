@@ -29,4 +29,11 @@ public class StringsTest {
 		assertFalse(Strings.haveMatchingChars(s1, s2));
 		assertFalse(Strings.haveMatchingChars(s2, s1));
 	}
+	
+	@Test
+	public void mostFrequentCharsInString() {
+		String s = "abcbab";
+		assertEquals(Character.valueOf('b'), Strings.mostFrequentChar(s));
+	}
+
 }

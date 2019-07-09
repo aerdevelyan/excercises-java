@@ -1,6 +1,10 @@
 package etudes;
 
-import java.util.HashSet;
+import static java.util.stream.Collectors.toSet;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class Strings {
@@ -23,10 +27,17 @@ public class Strings {
 	}
 	
 	private static Set<Character> toSetOfChars(String s) {
-		Set<Character> chars = new HashSet<>();
-		for (int i = 0; i < s.length(); i++) {
-			chars.add(s.charAt(i));
-		}
-		return chars;
+		return s.chars().mapToObj(c -> (char)c).collect(toSet());
+	}
+	
+	/**
+	 * Find which character is most frequently encountered in a string.
+	 */
+	public static Character mostFrequentChar(String s) {
+		Map<Character, Integer> freqMap = new HashMap<>();
+		s.chars().forEach(ch -> {
+			freqMap.merge((char)ch, 1, Integer::sum);
+		});
+		return freqMap.entrySet().stream().max(Entry.comparingByValue()).get().getKey();
 	}
 }
